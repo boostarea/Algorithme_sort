@@ -23,15 +23,29 @@ public class InsertionSort {
             int value = data[i];
 
             int j=0;
-            int insertIndex=i;
+            int[] tmp = new int[2];
+            boolean first = false;
+            int change = i;
             for (; j < i; j++) {
                 if(value >= data[j]) {
-                    break;
+                    continue;
                 }
-                insertIndex = insertIndex > j ? j : insertIndex;
-                data[j+1]=data[j];
+
+                int index = j%2;
+                if (!first) {
+                    tmp[Math.abs(index-1)] = data[j];
+                    change = j;
+                    first=true;
+                }
+
+                tmp[index] = data[j+1];
+                if (index == 0) {
+                    data[j+1] = tmp[index+1];
+                } else {
+                    data[j+1] = tmp[index-1];
+                }
             }
-            data[insertIndex]=value;
+            data[change] = value;
         }
         System.out.println(Arrays.toString(data));
     }
