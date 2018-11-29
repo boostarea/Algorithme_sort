@@ -22,24 +22,20 @@ public class InsertionSort {
         for (int i=1; i < data.length; i++) {
             int value = data[i];
 
-            int j=0;
             int[] tmp = new int[2];
-            boolean first = false;
             int change = i;
-            for (; j < i; j++) {
+            for (int j=0; j < i; j++) {
                 if(value >= data[j]) {
                     continue;
                 }
 
                 int index = j%2;
-                if (!first) {
+                if (change == i) {
                     tmp[Math.abs(index-1)] = data[j];
                     change = j;
-                    first=true;
                 }
-
                 tmp[index] = data[j+1];
-                if (index == 0) {
+                if (0 == index) {
                     data[j+1] = tmp[index+1];
                 } else {
                     data[j+1] = tmp[index-1];
